@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arctic Meat</title>
+    <link rel="stylesheet" href="stylo.css">
+    <link rel="shortcut icon" href="favicon.png">
+</head>
+<body>
+
+    <!-- ===== MODAL LOGIN ===== -->
+    <div id="modalLogin" class="modal">
+        <div class="modal-content">
+            <h2>Identificación de Cliente</h2>
+            <p style="color:#666; font-size:14px; margin-bottom:10px;">
+                Ingrese su CI y contraseña. Si aún no tiene cuenta, haga clic en "Soy cliente nuevo".
+            </p>
+
+            <!-- Mensaje de error visible solo cuando hay un problema -->
+            <div id="loginError" class="error-msg" style="display:none;"></div>
+
+            <input type="text" id="ci" placeholder="Número de CI">
+            <input type="password" id="contrasena" placeholder="Contraseña">
+
+            <button id="btnLogin" onclick="iniciarSesion()">Ingresar</button>
+            <button onclick="mostrarRegistro()" class="boton-secundario">Soy cliente nuevo</button>
+        </div>
+    </div>
+
+    <!-- ===== MODAL REGISTRO ===== -->
+    <div id="modalRegistro" class="modal" style="display:none;">
+        <div class="modal-content">
+            <h2>Registro de Cliente</h2>
+            <p style="color:#666; font-size:14px; margin-bottom:10px;">
+                Complete sus datos para crear una cuenta nueva.
+            </p>
+
+            <!-- Mensaje de error visible solo cuando hay un problema -->
+            <div id="registroError" class="error-msg" style="display:none;"></div>
+
+            <input type="text" id="registroNombre" placeholder="Nombre completo">
+            <input type="text" id="registroCi" placeholder="Número de CI">
+            <input type="email" id="registroEmail" placeholder="Correo Electrónico">
+            <input type="password" id="registroContrasena" placeholder="Contraseña">
+            <input type="text" id="registroDireccion" placeholder="Dirección">
+            <select id="registroTipoEmpresa">
+                <option value="">Tipo de empresa</option>
+                <option value="Supermercado mayorista">Supermercado mayorista</option>
+                <option value="Carnicería">Carnicería</option>
+                <option value="Restaurante">Restaurante</option>
+                <option value="Distribuidora">Distribuidora</option>
+                <option value="Otro">Otro</option>
+            </select>
+
+            <button id="btnRegistro" onclick="registrarCliente()">Registrarme</button>
+            <button onclick="mostrarLogin()" class="boton-secundario">Ya tengo cuenta</button>
+        </div>
+    </div>
+
+<div id="contenido" style="display:none;">
+    <!-- Todo el contenido de tu página va aquí -->
+</div>
+
+    <header>
+        <div class="logo">
+            <h1>Arctic Meat</h1>
+            <p>Frigorífico & Distribuidora</p>
+        </div>
+
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#nosotros">Nosotros</a>
+            <a href="#productos">Productos</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h2>Calidad y Frescura Garantizada</h2>
+            <p>
+                Empresa dedicada a la distribución y comercialización
+                de productos cárnicos de alta calidad.
+            </p>
+            <button onclick="mostrarMensaje()">Ver Productos</button>
+        </div>
+    </section>
+
+    <section class="nosotros" id="nosotros">
+        <div class="contenido-nosotros">
+            <img src="ArticMeat-Logo.jpg" alt="Frigorifico">
+
+            <div>
+                <h2>SOBRE NOSOTROS</h2>
+                <p>
+                    Arctic Meat es un frigorífico enfocado en la venta,
+                    distribución y conservación de carnes y derivados.
+                    Nuestro sistema desarrollado en Java permitirá gestionar
+                    productos, ventas y stock de manera eficiente.
+                    Cada uno de nuestros productos cuenta con la mas alta calidad.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="productos" id="productos">
+        <h2>Nuestros Productos</h2>
+
+        <div class="contenedor-productos">
+
+
+         <div class="card">
+                <img src="https://tse2.mm.bing.net/th/id/OIP.1pIxYXuoNtJHWivx7HLOfwHaEK?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Carnaza negra de Vaca">
+                <h3>Carnaza Negra de vaca </h3>
+            <p>Gs. 63.900</p>
+
+            <button onclick="agregarCarrito('Carnaza Negra',63900)">
+                Agregar al carrito
+            </button>
+        </div>
+
+            <div class="card">
+                <img src="https://tse1.explicit.bing.net/th/id/OIP.EPRRNhz9UWkDY9LNfQqE7AHaE8?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Vacio">
+                <h3>Vacio </h3>
+            <p>Gs. 55.950</p>
+
+            <button onclick="agregarCarrito('Vacio',55950)">
+                Agregar al carrito
+            </button>
+        </div>
+
+            <div class="card">
+                <img src="https://tse4.mm.bing.net/th/id/OIP.YyXieDcn65nrHd98XTKZBQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Matambre">
+                <h3>Matambre </h3>
+            <p>Gs. 33.900</p>
+
+            <button onclick="agregarCarrito('Matambre',33900)">
+                Agregar al carrito
+            </button>
+        </div>
+
+            <div class="card">
+                <img src="https://th.bing.com/th/id/OIP.3Ug5wdCcfAsfHrHa-m2xKQHaE8?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Peceto">
+                <h3>Peceto </h3>
+            <p>Gs. 34.900</p>
+
+            <button onclick="agregarCarrito('Peceto',34900)">
+                Agregar al carrito
+            </button>
+        
+        </div>
+
+         <div class="card">
+                <img src="https://www.minervafoods.com/wp-content/uploads/2019/05/bife_ancho_1.jpg" alt="Bife Ancho">
+                <h3>Bife Ancho </h3>
+            <p>Gs. 62.300</p>
+
+            <button onclick="agregarCarrito('Bife Ancho',62300)">
+                Agregar al carrito
+            </button>
+        </div>
+        
+            <div class="card">
+                <img src="https://tse2.mm.bing.net/th/id/OIP.arNCha-JTZy0ofkPsi4XEQHaE8?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Costilla">
+                <h3>Costilla </h3>
+            <p>Gs. 49.950</p>
+
+            <button onclick="agregarCarrito('Costilla',49950)">
+                Agregar al carrito
+            </button>
+            </div>
+
+             <div class="card">
+                <img src="https://www.stock.com.py/images/thumbs/0194798_500.jpeg" alt="Costilla Ancha">
+                <h3>Costilla Ancha</h3>
+            <p>Gs. 42.450</p>
+
+            <button onclick="agregarCarrito('Costilla Ancha',42450)">
+                Agregar al carrito
+            </button>
+            </div>
+
+        <div class="card">
+                <img src="https://www.casabartuelo.es/wp-content/uploads/2020/10/falda-2-casa-bartuelo.jpg" alt="Falda">
+                <h3>Falda </h3>
+            <p>Gs. 29.000</p>
+
+            <button onclick="agregarCarrito('Falda',29000)">
+                Agregar al carrito
+            </button>
+        </div>
+
+            <div class="card">
+                <img src="https://tse3.mm.bing.net/th/id/OIP.u5JJoFqqNrc_qo2-xrp0GgHaE6?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Jamon Ahumado">
+                <h3>Hamon Ahumado</h3>
+                <p>Gs. 53.900</p>
+
+            <button onclick="agregarCarrito('Jamon Ahumado',53900)">
+                Agregar al carrito
+            </button>
+        </div>
+
+         <div class="card">
+                <img src="https://th.bing.com/th/id/R.9b9da1d56b4a99d4126bb8ef33662fb2?rik=3%2b7VNXDWDqo8Kw&pid=ImgRaw&r=0" alt="Chorizo de Viena">
+                <h3>Chorizo de Viena</h3>
+                <p>Gs. 31.400</p>
+
+            <button onclick="agregarCarrito('Chorizo de Viena',31400)">
+                Agregar al carrito
+            </button>
+        </div>
+
+         <div class="card">
+                <img src="https://tse2.mm.bing.net/th/id/OIP.J3JvF0tYNiGdccnDSHnnYQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Chorizo Parrillero">
+                <h3>Chorizo Parrillero</h3>
+                <p>Gs. 42.300</p>
+
+            <button onclick="agregarCarrito('Chorizo Parrillero',42300)">
+                Agregar al carrito
+            </button>
+        </div>
+
+        <div class="card">
+                <img src="https://tse3.mm.bing.net/th/id/OIP.vSlmEGWrzQ73ukdte4RMbAHaEm?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Chorizo con Queso">
+                <h3>Chorizo con Queso</h3>
+                <p>Gs. 49.600</p>
+
+            <button onclick="agregarCarrito('Chorizo con Queso',43600)">
+                Agregar al carrito
+            </button>
+        </div>
+
+            <div class="card">
+                <img src="https://www.carnicentro.com.pe/wp-content/uploads/2020/09/HIGADO-3-3.jpg" alt="Higado vacuno">
+                <h3>Higado vacuno</h3>
+                <p>Gs. 15.500</p>
+
+            <button onclick="agregarCarrito('Higado vacuno',15500)">
+                Agregar al carrito
+                 </button>
+                 </div>
+
+                  <div class="card">
+                <img src="https://tse1.explicit.bing.net/th/id/OIP.Lh-3NypqRpf1yJ0tVLn34wHaFR?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Corazon vacuno">
+                <h3>Corazon vacuno</h3>
+                <p>Gs. 15.900</p>
+
+            <button onclick="agregarCarrito('Corazon vacuno',15900)">
+                Agregar al carrito
+                 </button>
+                 </div>
+
+                  <div class="card">
+                <img src="https://www.stock.com.py/images/thumbs/0202331.jpeg" alt="Mondongo">
+                <h3>Mondongo</h3>
+                <p>Gs. 19.900</p>
+
+            <button onclick="agregarCarrito('Mondongo',19900)">
+                Agregar al carrito
+                 </button>
+                 </div>
+
+                 <div class="card">
+                <img src="https://tse2.mm.bing.net/th/id/OIP.MH0TKV3Xx0cBaPkrTMrkGwHaEg?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Librillo">
+                <h3>Librillo</h3>
+                <p>Gs. 14.500</p>
+
+            <button onclick="agregarCarrito('Librillo',14500)">
+                Agregar al carrito
+                 </button>
+                 </div>
+
+                 <div class="card">
+                <img src="https://tse3.mm.bing.net/th/id/OIP.BDoTHIxPyHjg3IxzcEN3eQHaE5?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Riñon">
+                <h3>Riñon</h3>
+                <p>Gs. 12.950</p>
+
+            <button onclick="agregarCarrito('Riñon',12950)">
+                Agregar al carrito
+                 </button>
+                 </div>
+
+                 <div class="card">
+                <img src="https://tse3.mm.bing.net/th/id/OIP.SGjZERK0tAPls65LtVI38AHaE0?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Molleja">
+                <h3>Molleja</h3>
+                <p>Gs. 97.750</p>
+
+            <button onclick="agregarCarrito('Molleja',97750)">
+                Agregar al carrito
+                 </button>
+                 </div>
+
+                 <div class="card">
+                <img src="https://tse2.mm.bing.net/th/id/OIP.x7g2TEvbfNs-X6_T1jidfwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Lengua de vaca">
+                <h3>Lengua de vaca</h3>
+                <p>Gs. 19.900</p>
+
+            <button onclick="agregarCarrito('Lengua de vaca',19900)">
+                Agregar al carrito
+                 </button>
+                 </div>
+
+                 <div class="card">
+                <img src="https://tse4.mm.bing.net/th/id/OIP.w-0rinKDnu-BXWy4SaYN1gHaHa?w=720&h=720&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Chuchulin">
+                <h3>Chuchulin</h3>
+                <p>Gs. 16.500</p>
+
+            <button onclick="agregarCarrito('Chuchulin',16500)">
+                Agregar al carrito
+                 </button>
+                 </div>
+
+            <div class="card">
+                <img src="https://tse4.mm.bing.net/th/id/OIP.yQRjhNu1z-zSmYHH4ejYcAHaE7?rs=1&pid=ImgDetMain&o=7&rm=3" atlt="Costillita de Cerdo">
+                 <h3>Costillita de cerdo</h3>
+                <p>Gs. 24.900</p>
+            <button onclick="agregarCarrito('Costillita de cerdo',24900)">
+                Agregar al carrito
+                </button>
+                </div>
+                
+                <div class="card">
+                <img src="https://carnesjmendoza.com/wp-content/uploads/2020/06/pierna-de-cerdo.jpg" atlt="Pierna de Cerdo">
+                 <h3>Pierna de cerdo</h3>
+                <p>Gs. 20.450</p>
+            <button onclick="agregarCarrito('Pierna de cerdo',20450)">
+                Agregar al carrito
+                </button>
+                </div>
+
+                <div class="card">
+                <img src="https://tse1.explicit.bing.net/th/id/OIP.59vqpxnyzCWloyMdcAaOdAHaE8?rs=1&pid=ImgDetMain&o=7&rm=3" atlt="Paleta de Cerdo">
+                 <h3>Paleta de cerdo</h3>
+                <p>Gs. 19.950</p>
+            <button onclick="agregarCarrito('Paleta de cerdo',19950)">
+                Agregar al carrito
+                </button>
+                </div>
+
+                <div class="card">
+                <img src="https://th.bing.com/th/id/R.2db92416898e555b2a051e9fc55b442e?rik=d4iDY%2bNNcPuy0A&pid=ImgRaw&r=0" atlt="Lomo de Cerdo">
+                 <h3>Lomo de cerdo</h3>
+                <p>Gs. 54.000</p>
+            <button onclick="agregarCarrito('Lomo de cerdo',54000)">
+                Agregar al carrito
+                </button>
+                </div>
+
+            <div class="card">
+                <img src="https://avicrudas.com/wp-content/uploads/2023/03/muslo-pollo-1kg.jpg" alt="Muslo depollo"> 
+                <h3>Muslo de Pollo</h3>
+                <p>Gs. 25.600</p>
+            <button onclick="agregarCarrito('Muslo de Pollo',25600)">
+                Agregar al carrito
+                </button>
+                </div>
+
+                <div class="card">
+                <img src="https://tse1.explicit.bing.net/th/id/OIP.iIwh4apmiIKDdu_7EHspZAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Alitas depollo"> 
+                <h3>Alitas de Pollo</h3>
+                <p>Gs. 26.350</p>
+            <button onclick="agregarCarrito('Alitas de Pollo',26350)">
+                Agregar al carrito
+                </button>
+                </div>
+
+                 <div class="card">
+                <img src="https://tse1.explicit.bing.net/th/id/OIP.5rZcVWNkUT8-AZQK5ZOnmgHaE8?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Pechuga de Pollo"> 
+                <h3>Pechuga de Pollo</h3>
+                <p>Gs. 23.750</p>
+            <button onclick="agregarCarrito('Pechuga de Pollo',23750)">
+                Agregar al carrito
+                </button>
+                </div>
+
+                <div class="card">
+                <img src="https://tse1.explicit.bing.net/th/id/OIP.nRPjS17giCmsXoaYP8Wt7AHaFj?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Pollo Entero"> 
+                <h3>Pollo Entero</h3>
+                <p>Gs. 19.450</p>
+            <button onclick="agregarCarrito('Pollo Entero',19450)">
+                Agregar al carrito
+                </button>
+                </div>
+
+                <div class="card">
+                <img src="https://tse2.mm.bing.net/th/id/OIP.n2hxZ0XmDXy9jKE97cUUlwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Lomo de Cordero">
+                <h3>Lomo de Cordero</h3>
+                <p>Gs. 65.500</p>
+
+            <button onclick="agregarCarrito('Lomo de Cordero',65500)">
+                Agregar al carrito
+                 </button>
+                 </div>
+
+                 <div class="card">
+                <img src="https://th.bing.com/th/id/R.c3ecd729d94f74001fb1cc856a3e851e?rik=n24U64%2fwFdaT8A&pid=ImgRaw&r=0" alt="Pescuezo de Cordero">
+                <h3>Pescuezo de Cordero</h3>
+                <p>Gs. 20.500</p>
+
+            <button onclick="agregarCarrito('Pescuezo de Cordero',20500)">
+                Agregar al carrito
+                 </button>
+                 </div>
+
+                 <div class="card">
+                <img src="https://th.bing.com/th/id/OIP.UTYpUN8Qbj2xKHWHIg3TqwHaHa?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Pierna de Cordero">
+                <h3>Pierna de Cordero</h3>
+                <p>Gs. 47.500</p>
+
+            <button onclick="agregarCarrito('Pierna de Cordero',47500)">
+                Agregar al carrito
+                 </button>
+                 </div>
+
+                 <div class="card">
+                <img src="https://th.bing.com/th/id/R.2b26ed7ebd3b39fb2cca6d42018d9196?rik=geHmYnmkriIhZw&pid=ImgRaw&r=0" alt="Costilla de Cordero">
+                <h3>Costilla de Cordero</h3>
+                <p>Gs. 45.000</p>
+
+            <button onclick="agregarCarrito('Costilla de Cordero',45000)">
+                Agregar al carrito
+                 </button>
+                 </div>
+        
+                <div class="card">
+                <img src="https://th.bing.com/th/id/OIP.gyVApbZR-YANeV5vxzf5vwHaE9?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Hamburguesas">
+                <h3>Hamburguesas</h3>
+                <p>Gs. 33.000</p>
+
+            <button onclick="agregarCarrito('Hamburguesas',33000)">
+                Agregar al carrito
+            </button>
+        </div>
+
+        <div class="card">
+                <img src="https://tse2.mm.bing.net/th/id/OIP.gNlN5rPZRRAHpc-iS6HiEQHaE9?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Carne Molida">
+                <h3>Carne Molida</h3>
+                <p>Gs. 33.500</p>
+
+            <button onclick="agregarCarrito('Carne Molida',34500)">
+                Agregar al carrito
+            </button>
+        </div>
+
+ <div class="card">
+                <img src="https://th.bing.com/th/id/OIP.qb9m4D9lwnBhEIdb9w025AHaE8?w=303&h=202&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="Nuggets">
+                <h3>Nuggets</h3>
+                <p>Gs. 35.000</p>
+
+            <button onclick="agregarCarrito('Nuggets',35000)">
+                Agregar al carrito
+            </button>
+        </div>
+        
+        <div class="card">
+                <img src="https://tse2.mm.bing.net/th/id/OIP._jAGSSmX4lFoi8NXoR5teAHaE5?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Milanesa de Pollo">
+                <h3>Milanesa de Pollo</h3>
+                <p>Gs. 4.900</p>
+
+            <button onclick="agregarCarrito('Milanesa de Pollo',4900)">
+                Agregar al carrito
+            </button>
+            </div>
+        </div>
+        </div>
+
+    </section>
+
+    <section class="carrito">
+        <h2>Carrito de Compras</h2>
+        <ul id="lista-carrito"></ul>
+        <h3>Total: Gs <span id="total">0</span></h3>
+        <button onclick="comprar()" class="comprar">
+            Comprar
+        </button>
+        <button onclick="vaciarCarrito()" class="vaciar">
+            vaciar carrito
+        </button>
+        </section>
+
+    <section class="factura" id="factura" style="display:none;">
+        <div class="factura-documento">
+            <div class="factura-encabezado">
+                <div class="factura-empresa">
+                    <h2>Arctic Meat</h2>
+                    <p>Frigorífico & Distribuidora</p>
+                    <p>Control operativo para carne importada: recepción, proceso, frío, calidad y despacho.</p>
+                    <p>Dirección: San Lorenzo, Paraguay</p>
+                    <p>Teléfono: +595 0986222444</p>
+                    <p>Mail: arcticmeat@gmail.com</p>
+                </div>
+
+                <div class="factura-datos">
+                    <h3>RUC: 80026041-4</h3>
+                    <p>Timbrado N.° 0000000</p>
+                    <p>Inicio: <span id="facturaInicio">01/01/2026</span></p>
+                    <p>Fin: <span id="facturaFin">31/12/2026</span></p>
+                    <h2>Factura</h2>
+                    <p id="facturaNumero">001-001-0000001</p>
+                </div>
+            </div>
+
+            <div class="factura-cliente">
+                <p>Fecha de emisión: <span id="facturaFecha"></span></p>
+                <p>Condición de venta: Contado</p>
+                <p>Nombre o razón: <span id="facturaCliente"></span></p>
+                <p>CI/RUC: <span id="facturaCi"></span></p>
+                <p>Dirección: <span id="facturaDireccion"></span></p>
+                <p>Tipo de empresa: <span id="facturaTipoEmpresa"></span></p>
+            </div>
+
+            <table class="factura-tabla">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Descripción</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Valor de venta</th>
+                    </tr>
+                </thead>
+                <tbody id="facturaDetalle"></tbody>
+            </table>
+
+            <div class="factura-total">
+                <p>SUB TOTAL: Gs <span id="facturaSubtotal"></span></p>
+                <p>TOTAL A PAGAR EN GS.: <span id="facturaTotalTexto"></span></p>
+                <h3>Gs <span id="facturaTotal"></span></h3>
+            </div>
+
+            <div class="factura-pie">
+                <div class="qr-demo"></div>
+                <div>
+                    <p>Consulte la validez de esta Factura Electrónica con el número de CDC</p>
+                    <p>https://ekuatia.set.gov.py/consultas/</p>
+                    <strong>00000000000000000000000000000000000000000000</strong>
+                    <p>ESTE DOCUMENTO ES UNA REPRESENTACIÓN GRÁFICA DE UN DOCUMENTO</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contacto" id="contacto">
+        <h2>Contáctanos</h2>
+
+        <div class="datos-contacto">
+            <div>
+                <h3>Dirección</h3>
+                <p>San Lorenzo, Paraguay</p>
+            </div>
+
+            <div>
+                <h3>Teléfono</h3>
+                <p>+595 0986222444</p>
+            </div>
+
+            <div>
+                <h3>Correo</h3>
+                <p>arcticmeat@gmail.com</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Arctic Meat - Proyecto POO</p>
+    </footer>
+    <script src="script.js"></script>
+    <script src="api.js"></script>
+</body>
+</html>
