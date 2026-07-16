@@ -16,7 +16,7 @@ public class DetalleCompra {
     private Integer compraID;
 
     @JsonProperty("productoNombre")
-    @Column(nullable = false)
+    @Column(name = "productoNombre", nullable = false)
     private String productoNombre;
 
     @JsonProperty("cantidad")
