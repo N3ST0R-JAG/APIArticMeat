@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/api/usuario")
-@CrossOrigin(origins = "https://api-articmeat.onrender.com")
+@CrossOrigin(origins = "*")
 public class UsuarioController {
 	
 	@Autowired
